@@ -3,486 +3,625 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Línea de tiempo epidemiológica — Hantavirus M/V Hondius</title>
+  <title>Línea de tiempo epidemiológica — Hantavirus Andes M/V Hondius</title>
   <style>
     :root{
-      --bg1:#071120;
-      --bg2:#0b1f3b;
-      --card:#ffffff;
-      --ink:#09265d;
-      --blue:#0b6fcf;
-      --cyan:#54b8ff;
-      --purple:#bb4dff;
-      --orange:#f59b28;
-      --green:#22a36c;
-      --gray:#7c8aa5;
-      --red:#ff3b4f;
-      --line:#8ed0ff;
-      --soft:#eaf5ff;
-      --border:#b9d8f2;
+      --azul-oscuro:#061b55;
+      --azul:#0b55b7;
+      --azul-medio:#1d72d2;
+      --azul-claro:#eaf4ff;
+      --borde:#b9c8dc;
+      --texto:#071634;
+      --gris:#f7f9fc;
+      --naranja:#f97316;
+      --rojo:#e00000;
+      --morado:#7e22ce;
+      --verde:#18864b;
+      --dorado:#f59e0b;
+      --lila:#ede7ff;
     }
 
-    *{box-sizing:border-box}
+    *{ box-sizing:border-box; }
+
     body{
       margin:0;
+      background:#eef4fb;
+      color:var(--texto);
       font-family:"Segoe UI", Arial, sans-serif;
-      background:radial-gradient(circle at 20% 0%, #e8f6ff 0%, #ffffff 28%, #dcefff 100%);
-      color:#10213f;
     }
 
-    .page{
-      max-width:1500px;
+    .poster{
+      width:1700px;
+      min-height:980px;
       margin:0 auto;
-      padding:30px 22px 48px;
-    }
-
-    .topbar{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:18px;
-      margin-bottom:18px;
-    }
-
-    .hero,.quick{
-      background:rgba(255,255,255,.94);
-      border:1px solid var(--border);
-      border-radius:26px;
-      box-shadow:0 18px 45px rgba(7,17,32,.12);
-      padding:26px 30px;
-      overflow:hidden;
+      padding:18px 20px 16px;
+      background:linear-gradient(180deg,#ffffff 0%,#f8fbff 58%,#edf6ff 100%);
       position:relative;
     }
 
-    .hero:after{
-      content:"";
-      position:absolute;
-      width:360px;height:360px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(11,111,207,.18), transparent 65%);
-      right:-120px;top:-150px;
-    }
-
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 14px;
-      border-radius:999px;
-      background:#071f4d;
-      color:#fff;
-      font-weight:800;
-      font-size:.92rem;
-      letter-spacing:.02em;
+    header{
+      display:grid;
+      grid-template-columns:1.12fr .45fr .72fr;
+      gap:16px;
+      align-items:start;
+      margin-bottom:12px;
     }
 
     h1{
-      margin:16px 0 10px;
-      line-height:.95;
-      font-size:clamp(2.4rem,5vw,5rem);
-      color:var(--ink);
+      margin:0;
+      font-size:39px;
+      line-height:1.02;
+      color:var(--azul-oscuro);
       text-transform:uppercase;
-      letter-spacing:-.04em;
-    }
-    h1 span{color:var(--blue)}
-
-    .subtitle{
-      margin:0;
-      max-width:850px;
-      font-size:1.22rem;
-      line-height:1.45;
+      letter-spacing:.015em;
+      font-weight:950;
     }
 
-    .pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-    .pill{
-      background:#dceeff;
-      color:#08275f;
-      border:1px solid #add4f8;
-      border-radius:999px;
-      padding:8px 13px;
-      font-weight:800;
-      font-size:.9rem;
+    .subtitulo{
+      margin-top:6px;
+      color:var(--azul-oscuro);
+      font-size:22px;
+      text-transform:uppercase;
+      font-weight:850;
+      letter-spacing:.03em;
     }
 
-    .quick h2{margin:0 0 10px;color:var(--ink);font-size:1.35rem}
-    .quick p{margin:0;line-height:1.5;font-size:1rem}
+    .subtitulo span{ color:var(--azul-medio); }
 
-    .legend{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      align-items:center;
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:14px 18px;
-      margin-bottom:18px;
-      box-shadow:0 8px 22px rgba(7,17,32,.07);
-      font-weight:800;
-      color:#09265d;
-    }
-    .legend span{display:inline-flex;align-items:center;gap:8px}
-    .dot{width:14px;height:14px;border-radius:50%;display:inline-block}
-    .d-confirmed{background:var(--blue)}
-    .d-suspected{background:var(--orange)}
-    .d-context{background:var(--gray)}
-    .d-response{background:var(--green)}
-    .d-air{background:var(--red)}
-
-    .panel{
-      background:linear-gradient(180deg,#ffffff 0%,#f2f9ff 100%);
-      border:1px solid var(--border);
-      border-radius:30px;
-      box-shadow:0 20px 50px rgba(7,17,32,.13);
-      padding:26px;
-      overflow-x:auto;
+    .updated-badge{
+      display:inline-block;
+      margin-top:10px;
+      padding:7px 16px;
+      border-radius:8px;
+      background:var(--azul-oscuro);
+      color:white;
+      font-weight:900;
+      font-size:15px;
+      letter-spacing:.04em;
     }
 
-    .timeline-title{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      min-width:1320px;
-      margin-bottom:14px;
+    .updated-badge small{ font-weight:600; opacity:.9; }
+
+    .card{
+      background:rgba(255,255,255,.96);
+      border:1.5px solid var(--borde);
+      border-radius:9px;
+      box-shadow:0 4px 12px rgba(7,27,87,.07);
     }
-    .timeline-title h2{
-      margin:0;
-      color:var(--ink);
-      font-size:2rem;
+
+    .brand-card{
+      padding:12px 16px;
+      font-size:14px;
+      line-height:1.25;
+      color:var(--azul-oscuro);
+      text-align:center;
+    }
+
+    .brand-card strong{
+      display:block;
+      font-size:18px;
+      color:var(--morado);
+      margin-top:2px;
+    }
+
+    .summary-card{
+      padding:12px 16px;
+    }
+
+    .summary-card h2{
+      margin:0 0 6px;
+      font-size:22px;
+      color:var(--azul-oscuro);
+      text-transform:uppercase;
       line-height:1.05;
     }
-    .timeline-title small{
-      display:block;
-      color:#4f648c;
-      font-weight:800;
-      margin-top:5px;
-    }
-    .credit{
-      border:1px solid #b9d4ef;
-      border-radius:16px;
-      padding:10px 14px;
-      font-weight:900;
-      color:var(--blue);
-      background:#fff;
-      white-space:nowrap;
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:6px 10px;
     }
 
-    .timeline{
-      min-width:1320px;
+    .summary-row{
+      display:grid;
+      grid-template-columns:30px 34px 1fr;
+      align-items:center;
+      gap:6px;
+      font-size:14px;
+    }
+
+    .summary-row .n{
+      color:var(--azul-medio);
+      font-weight:950;
+      font-size:24px;
+      text-align:center;
+    }
+
+    .summary-row .ico{
+      font-size:22px;
+      text-align:center;
+      color:var(--azul-oscuro);
+    }
+
+    .summary-row.death .n,.summary-row.death .ico{color:var(--rojo);}
+    .summary-row.suspected .n,.summary-row.suspected .ico{color:var(--naranja);}
+
+    .legend-top{
+      display:grid;
+      grid-template-columns:1fr 250px 300px 335px;
+      gap:14px;
+      margin-bottom:14px;
+    }
+
+    .event-type,.unknown,.risk-mini,.arcgis-mini{
+      padding:12px 16px;
+    }
+
+    .event-type h3,
+    .unknown h3,
+    .risk-mini h3,
+    .arcgis-mini h3{
+      margin:0 0 12px;
+      color:var(--azul-oscuro);
+      font-size:15px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .legend-items{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      align-items:center;
+      font-size:13px;
+      font-weight:750;
+    }
+
+    .dot{
+      display:inline-block;
+      width:15px;
+      height:15px;
+      border-radius:50%;
+      margin-right:7px;
+      vertical-align:-2px;
+    }
+
+    .dot.nav{background:var(--azul);}
+    .dot.case{background:var(--naranja);}
+    .dot.death{background:var(--rojo);}
+    .dot.evac{background:var(--morado);}
+    .dot.response{background:var(--verde);}
+    .dot.repat{background:#b91c1c;}
+    .dot.unknown{
+      background:repeating-linear-gradient(45deg,var(--naranja),var(--naranja) 3px,#fff 3px,#fff 7px);
+      border:1px solid var(--naranja);
+    }
+
+    .unknown,.risk-mini,.arcgis-mini{
+      font-size:13px;
+      line-height:1.28;
+    }
+
+    .arcgis-mini{
+      background:linear-gradient(180deg,#ffffff 0%,#f4f0ff 100%);
+      border-color:#c4b5fd;
+    }
+
+    .arcgis-mini b{color:var(--morado);}
+
+    .risk-mini b.low{color:var(--verde);}
+    .risk-mini b.mod{color:var(--dorado);}
+
+    .timeline-frame{
       position:relative;
-      height:720px;
-      padding-top:10px;
+      height:430px;
+      margin-top:4px;
+    }
+
+    .months{
+      position:absolute;
+      left:0;right:0;top:0;
+      display:grid;
+      grid-template-columns:68% 32%;
+      height:24px;
+      overflow:hidden;
+      border-radius:4px 4px 0 0;
+    }
+
+    .month{
+      background:var(--azul-oscuro);
+      color:white;
+      text-align:center;
+      font-weight:950;
+      letter-spacing:.06em;
+      font-size:15px;
+      line-height:24px;
+      border-right:2px solid white;
+    }
+
+    .day-row{
+      position:absolute;
+      left:0;right:0;top:24px;
+      height:26px;
+      display:grid;
+      grid-template-columns:repeat(42,1fr);
+      background:white;
+      border:1px solid var(--borde);
+      border-top:none;
+    }
+
+    .day{
+      text-align:center;
+      font-size:12px;
+      line-height:26px;
+      border-right:1px solid #d7e0ec;
+      color:var(--azul-oscuro);
+      font-weight:700;
     }
 
     .axis{
       position:absolute;
-      left:22px;
-      right:22px;
-      top:330px;
-      height:6px;
-      background:linear-gradient(90deg,#06245c,#0b6fcf,#55a9f4);
+      left:22px;right:22px;top:230px;
+      height:7px;
+      background:var(--azul-oscuro);
       border-radius:999px;
-      box-shadow:0 0 0 6px rgba(84,184,255,.12);
+      box-shadow:0 2px 5px rgba(7,27,87,.25);
     }
 
-    .month{
+    .axis-dot{
       position:absolute;
-      top:348px;
-      color:var(--ink);
-      font-size:1.22rem;
-      font-weight:950;
-      letter-spacing:.06em;
-    }
-    .apr{left:36px}.may{right:160px}
-
-    .tick{
-      position:absolute;
-      top:319px;
-      width:2px;
-      height:28px;
-      background:#9ecbf1;
-    }
-
-    .marker{
-      position:absolute;
-      top:319px;
-      width:28px;height:28px;
+      top:-6px;
+      width:18px;height:18px;
       border-radius:50%;
-      background:var(--blue);
-      border:5px solid #fff;
-      box-shadow:0 0 0 3px var(--blue);
-      z-index:4;
+      background:var(--azul);
+      border:3px solid #c7e0ff;
       transform:translateX(-50%);
+      z-index:3;
     }
 
-    .marker.sus{background:var(--orange);box-shadow:0 0 0 3px var(--orange)}
-    .marker.res{background:var(--green);box-shadow:0 0 0 3px var(--green)}
-    .marker.ctx{background:var(--gray);box-shadow:0 0 0 3px var(--gray)}
+    .axis-dot.case{background:var(--naranja);border-color:#ffd8bd;}
+    .axis-dot.death{background:var(--rojo);border-color:#ffd0d0;}
+    .axis-dot.evac{background:var(--morado);border-color:#dfc3ff;}
+    .axis-dot.response{background:var(--verde);border-color:#c9f3d4;}
+    .axis-dot.repat{background:#b91c1c;border-color:#fecaca;}
 
     .event{
       position:absolute;
-      width:208px;
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:13px 14px 14px;
-      box-shadow:0 12px 28px rgba(7,17,32,.13);
-      z-index:3;
+      width:128px;
+      min-height:92px;
+      background:white;
+      border:1.6px solid var(--azul-medio);
+      border-radius:6px;
+      padding:8px 8px 7px;
+      font-size:10.9px;
+      line-height:1.17;
+      box-shadow:0 3px 8px rgba(7,27,87,.08);
     }
-    .event:after{
+
+    .event::after{
       content:"";
       position:absolute;
-      left:28px;
+      left:24px;
       width:2px;
-      background:#9ecbf1;
+      border-left:2px dashed currentColor;
+      opacity:.65;
     }
-    .event.top:after{height:78px;bottom:-78px}
-    .event.bottom:after{height:78px;top:-78px}
-    .event.top{top:78px}
-    .event.bottom{top:392px}
 
-    .date{
-      display:inline-block;
+    .event.top::after{ top:100%; height:30px; }
+    .event.bottom::after{ bottom:100%; height:30px; }
+
+    .event.nav{ color:var(--azul); border-color:var(--azul-medio); }
+    .event.case{ color:var(--naranja); border-color:var(--naranja); }
+    .event.death{ color:var(--rojo); border-color:var(--rojo); }
+    .event.evac{ color:var(--morado); border-color:var(--morado); }
+    .event.response{ color:var(--verde); border-color:var(--verde); }
+    .event.repat{ color:#b91c1c; border-color:#b91c1c; background:#fffafa; }
+
+    .event strong{
+      display:block;
+      color:inherit;
+      font-size:12.5px;
+      font-weight:950;
+      margin-bottom:4px;
+      text-transform:uppercase;
+    }
+
+    .event b{ color:var(--texto); }
+    .event p{ margin:0; color:#101828; }
+    .event .emoji{ position:absolute; right:8px; bottom:5px; font-size:21px; color:inherit; }
+
+    .event-num{
+      position:absolute;
+      left:10px;top:-22px;
+      width:24px;height:24px;
+      border-radius:50%;
       color:white;
       font-weight:950;
-      border-radius:999px;
-      padding:5px 10px;
-      margin-bottom:8px;
-      font-size:.82rem;
-    }
-    .confirmed .date{background:var(--blue)}
-    .suspected .date{background:var(--orange)}
-    .context .date{background:var(--gray)}
-    .response .date{background:var(--green)}
-
-    .event h3{
-      margin:0 0 6px;
-      color:var(--ink);
-      font-size:1.02rem;
-      line-height:1.25;
-    }
-    .event p{
-      margin:0;
-      line-height:1.34;
-      font-size:.88rem;
+      text-align:center;
+      line-height:24px;
+      background:currentColor;
+      box-shadow:0 0 0 2px white, 0 2px 6px rgba(0,0,0,.18);
     }
 
-    .sidebox{
-      position:absolute;
-      right:22px;
-      top:500px;
-      width:360px;
-      background:#071f4d;
-      color:#fff;
-      border-radius:20px;
-      padding:18px;
-      box-shadow:0 16px 34px rgba(7,17,32,.25);
-      z-index:5;
-    }
-    .sidebox h3{margin:0 0 10px;color:#a7d9ff;font-size:1.15rem}
-    .sidebox p{margin:0;line-height:1.4;font-size:.92rem}
+    .event-num span{ filter:brightness(0) invert(1); }
+    .bottom .event-num{ top:auto; bottom:-22px; }
 
-    .stats{
+    .content-zone{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      margin-top:20px;
+      grid-template-columns:1fr 445px;
+      gap:18px;
+      margin-top:8px;
     }
-    .stat{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:20px;
-      padding:18px;
-      box-shadow:0 8px 22px rgba(7,17,32,.08);
-    }
-    .num{font-size:2.2rem;font-weight:950;color:var(--blue);line-height:1}
-    .lab{margin-top:6px;font-weight:850;color:var(--ink)}
 
-    .routes{
+    .case-table{ overflow:hidden; }
+
+    .bar-title{
+      background:var(--azul-oscuro);
+      color:white;
+      text-align:center;
+      font-weight:950;
+      padding:6px;
+      font-size:15px;
+      letter-spacing:.04em;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:11.5px;
+      background:white;
+    }
+
+    th{
+      background:#f8fbff;
+      color:var(--azul-oscuro);
+      border:1px solid #d5dee9;
+      padding:6px;
+      text-align:center;
+      font-weight:950;
+    }
+
+    td{
+      border:1px solid #d5dee9;
+      padding:5px 7px;
+      vertical-align:top;
+    }
+
+    td.center{text-align:center;font-weight:900;}
+    .case-chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:22px;height:22px;
+      border-radius:50%;
+      color:white;
+      font-weight:950;
+      font-size:12px;
+    }
+    .chip-confirmed{background:var(--azul);}
+    .chip-suspected{background:var(--naranja);}
+    .chip-unknown{background:repeating-linear-gradient(45deg,var(--naranja),var(--naranja) 3px,#fff 3px,#fff 7px);color:var(--azul-oscuro);border:1px solid var(--naranja);}
+
+    .side-bottom{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .route-box,.ref-box,.countries-box{
+      padding:10px 14px;
+    }
+
+    .route-box h3,.ref-box h3,.countries-box h3{
+      margin:0 0 8px;
+      text-align:center;
+      color:var(--azul-oscuro);
+      text-transform:uppercase;
+      font-size:15px;
+    }
+
+    .route-line{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:8px 0;
+      font-size:12.5px;
+    }
+
+    .line{
+      display:inline-block;
+      width:48px;height:0;
+      border-top:3px solid var(--azul-oscuro);
+    }
+    .line.evac{border-top:3px dashed var(--morado);}
+    .line.passenger{border-top:3px dotted var(--morado);}
+    .line.repat{border-top:3px dashed #b91c1c;}
+
+    .ref-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:16px;
-      margin-top:18px;
+      gap:6px 14px;
+      font-size:12px;
     }
-    .route-card{
-      background:#071120;
-      color:#fff;
-      border:1px solid rgba(187,77,255,.45);
-      border-radius:22px;
-      padding:18px 20px;
-    }
-    .route-card h3{margin:0 0 10px;color:#d77cff}
-    .route-card ul{margin:0;padding-left:18px;line-height:1.55}
-    .route-card strong{color:#79c4ff}
-    .risk strong:nth-child(1){color:#ffca45}
-    .risk strong:nth-child(2){color:#35d081}
 
-    .note{
-      margin-top:18px;
-      background:#06245c;
-      color:white;
-      border-radius:22px;
-      padding:18px 22px;
-      display:flex;
-      gap:18px;
-      justify-content:space-between;
-      align-items:center;
-      line-height:1.45;
+    .countries-box p{
+      margin:0;
+      font-size:12px;
+      line-height:1.35;
     }
-    .note strong{color:#79c4ff}
 
-    .footer{
-      margin-top:18px;
+    .foot{
+      margin-top:9px;
+      background:#dbeeff;
+      color:var(--azul-oscuro);
+      border-radius:6px;
+      padding:8px 16px;
+      font-size:12px;
       display:flex;
       justify-content:space-between;
-      align-items:center;
-      color:#06245c;
-      font-weight:850;
+      gap:12px;
     }
-    .brand{color:#0b6fcf}
 
-    @media(max-width:900px){
-      .topbar,.routes{grid-template-columns:1fr}
-      .stats{grid-template-columns:repeat(2,1fr)}
-      .note{flex-direction:column;align-items:flex-start}
+    .foot strong{color:var(--azul-medio);}
+
+    @media print{
+      body{background:white;}
+      .poster{width:1700px;}
     }
   </style>
 </head>
 <body>
-  <main class="page">
-    <section class="topbar">
-      <div class="hero">
-        <div class="tag">🛳️ Línea de tiempo epidemiológica</div>
-        <h1>Brote de <span>Hantavirus</span><br>Virus Andes</h1>
-        <p class="subtitle">Crucero internacional <strong>M/V Hondius</strong>. Cronología del 1 de abril al 5 de mayo de 2026, con inicio de síntomas, desenlaces, puertos de escala, evacuaciones médicas y confirmaciones de laboratorio.</p>
-        <div class="pills">
-          <span class="pill">M/V Hondius</span>
-          <span class="pill">Virus Andes (ANDV)</span>
-          <span class="pill">8 casos reportados</span>
-          <span class="pill">Riesgo global bajo</span>
+  <main class="poster">
+    <header>
+      <div>
+        <h1>Brote de hantavirus Andes asociado a crucero M/V Hondius</h1>
+        <div class="subtitulo">Trayecto del buque, eventos epidemiológicos y respuesta internacional</div>
+        <div class="updated-badge">ACTUALIZADO AL 11 DE MAYO DE 2026 <small>(23:00 UTC)</small></div>
+      </div>
+
+      <div class="card brand-card">
+        Elaborado por
+        <strong>@solsilvanazb_episig</strong>
+      </div>
+
+      <div class="card summary-card">
+        <h2>Situación global según actualización</h2>
+        <div class="summary-grid">
+          <div class="summary-row"><div class="ico">🦠</div><div class="n">8</div><div>casos confirmados/probables</div></div>
+          <div class="summary-row death"><div class="ico">✚</div><div class="n">3</div><div>fallecidos</div></div>
+          <div class="summary-row suspected"><div class="ico">🔎</div><div class="n">7</div><div>casos sospechosos</div></div>
+          <div class="summary-row"><div class="ico">🚢</div><div class="n">53</div><div>personas aún a bordo</div></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="legend-top">
+      <div class="card event-type">
+        <h3>Tipo de evento</h3>
+        <div class="legend-items">
+          <span><i class="dot nav"></i>Navegación / escalas</span>
+          <span><i class="dot case"></i>Inicio de síntomas</span>
+          <span><i class="dot death"></i>Fallecidos</span>
+          <span><i class="dot evac"></i>Evacuaciones / traslados</span>
+          <span><i class="dot response"></i>Respuesta / acciones</span>
+          <span><i class="dot repat"></i>Repatriación</span>
         </div>
       </div>
 
-      <div class="quick">
-        <h2>Lectura rápida</h2>
-        <p>La confirmación por laboratorio y la secuenciación identifican <strong>hantavirus Andes</strong>. Esta cepa se ha asociado en brotes previos a transmisión limitada entre personas en contactos muy estrechos; sin embargo, la transmisión principal sigue siendo zoonótica, vinculada a roedores o sus excretas.</p>
-        <div class="pills">
-          <span class="pill">Incubación: 1 a 6 semanas</span>
-          <span class="pill">Evento contenido</span>
-          <span class="pill">No es COVID-like</span>
+      <div class="card unknown">
+        <h3>Fechas no precisadas</h3>
+        <p><span><i class="dot unknown"></i></span><b>Casos 5 y 8</b><br>Fecha de inicio de síntomas no conocida / no reportada.</p>
+      </div>
+
+      <div class="card risk-mini">
+        <h3>Evaluación de riesgo</h3>
+        <p>Riesgo global para la población general: <b class="low">BAJO</b>.<br>La situación continúa bajo vigilancia y rastreo internacional de contactos.</p>
+      </div>
+
+      <div class="card arcgis-mini">
+        <h3>Fuente de datos actualizada</h3>
+        <p>Actualización integrada desde reportes oficiales y tablero de seguimiento: <b>8 casos confirmados/probables</b>, <b>7 sospechosos</b>, <b>3 fallecidos</b>, 94 pasajeros evacuados y 53 personas aún a bordo.</p>
+      </div>
+    </section>
+
+    <section class="timeline-frame">
+      <div class="months"><div class="month">ABRIL 2026</div><div class="month">MAYO 2026</div></div>
+      <div class="day-row">
+        <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div><div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div><div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div>
+      </div>
+
+      <div class="axis">
+        <span class="axis-dot nav" style="left:0%"></span>
+        <span class="axis-dot case" style="left:12.2%"></span>
+        <span class="axis-dot death" style="left:24.4%"></span>
+        <span class="axis-dot case" style="left:56.1%"></span>
+        <span class="axis-dot evac" style="left:58.5%"></span>
+        <span class="axis-dot death" style="left:61.0%"></span>
+        <span class="axis-dot evac" style="left:63.4%"></span>
+        <span class="axis-dot case" style="left:65.9%"></span>
+        <span class="axis-dot case" style="left:70.7%"></span>
+        <span class="axis-dot nav" style="left:78.0%"></span>
+        <span class="axis-dot response" style="left:80.5%"></span>
+        <span class="axis-dot response" style="left:82.9%"></span>
+        <span class="axis-dot evac" style="left:87.8%"></span>
+        <span class="axis-dot repat" style="left:97.6%"></span>
+      </div>
+
+      <article class="event nav top" style="left:18px; top:104px;"><span class="event-num"><span>1</span></span><strong>1 abr</strong><p><b>Zarpa</b> desde Ushuaia, Argentina.</p><span class="emoji">🛳</span></article>
+      <article class="event nav bottom" style="left:112px; top:276px;"><span class="event-num"><span>2</span></span><strong>5–6 abr</strong><p>Parada en Islas Malvinas.</p><span class="emoji">⚓</span></article>
+      <article class="event case top" style="left:182px; top:96px;"><span class="event-num"><span>3</span></span><strong>6 abr</strong><p>Inicio de síntomas <b>Caso 1</b>: fiebre, cefalea y diarrea.</p><span class="emoji">🧍</span></article>
+      <article class="event death top" style="left:395px; top:96px;"><span class="event-num"><span>4</span></span><strong>11 abr</strong><p>Fallece el <b>Caso 1</b> a bordo del crucero.</p><span class="emoji">✝</span></article>
+      <article class="event nav bottom" style="left:475px; top:276px;"><span class="event-num"><span>5</span></span><strong>13–14 abr</strong><p>Parada en Tristán da Cunha.</p><span class="emoji">⚓</span></article>
+      <article class="event nav bottom" style="left:615px; top:276px;"><span class="event-num"><span>6</span></span><strong>22–24 abr</strong><p>Parada en Tristán da Cunha / Santa Elena.</p><span class="emoji">⚓</span></article>
+      <article class="event case top" style="left:690px; top:96px; width:145px;"><span class="event-num"><span>7</span></span><strong>24 abr</strong><p>Inicio de síntomas <b>Casos 2 y 3</b>. Caso 2 desembarca en Santa Elena.</p><span class="emoji">👥</span></article>
+      <article class="event evac bottom" style="left:755px; top:276px;"><span class="event-num"><span>8</span></span><strong>25 abr</strong><p>Caso 2 viaja en vuelo comercial a Johannesburgo.</p><span class="emoji">✈</span></article>
+      <article class="event death bottom" style="left:875px; top:276px;"><span class="event-num"><span>9</span></span><strong>26 abr</strong><p>Fallece el <b>Caso 2</b> en Johannesburgo. Caso 3 empeora.</p><span class="emoji">✝</span></article>
+      <article class="event evac bottom" style="left:1010px; top:276px;"><span class="event-num"><span>10</span></span><strong>27 abr</strong><p>Caso 3 evacuado desde Isla Ascensión a Johannesburgo.</p><span class="emoji">✈</span></article>
+      <article class="event case top" style="left:900px; top:96px;"><span class="event-num"><span>11</span></span><strong>28 abr</strong><p>Inicio de síntomas <b>Casos 4 y 6</b>.</p><span class="emoji">👥</span></article>
+      <article class="event case top" style="left:1025px; top:96px;"><span class="event-num"><span>12</span></span><strong>30 abr</strong><p>Inicio de síntomas <b>Caso 7</b>.</p><span class="emoji">🧍</span></article>
+      <article class="event nav bottom" style="left:1165px; top:276px;"><span class="event-num"><span>13</span></span><strong>2 may</strong><p>Fondeo frente a Praia, Cabo Verde.</p><span class="emoji">🛳</span></article>
+      <article class="event response top" style="left:1175px; top:96px;"><span class="event-num"><span>14</span></span><strong>3 may</strong><p>OMS notifica a Cabo Verde. Laboratorio confirma hantavirus en Johannesburgo.</p><span class="emoji">🧪</span></article>
+      <article class="event response top" style="left:1308px; top:96px;"><span class="event-num"><span>15</span></span><strong>4 may</strong><p>OMS informa caso en Suiza que viajó desde Santa Elena.</p><span class="emoji">📣</span></article>
+      <article class="event response top" style="left:1435px; top:96px;"><span class="event-num"><span>16</span></span><strong>5 may</strong><p>Suiza confirma PCR positiva para hantavirus Andes: <b>Caso 8</b>.</p><span class="emoji">🔬</span></article>
+      <article class="event evac bottom" style="left:1405px; top:276px;"><span class="event-num"><span>17</span></span><strong>6 may</strong><p>Evacuación médica especializada desde Cabo Verde hacia Países Bajos.</p><span class="emoji">✈</span></article>
+      <article class="event repat top" style="left:1550px; top:96px;"><span class="event-num"><span>18</span></span><strong>10–11 may</strong><p>Arribo a Canarias, 94 pasajeros evacuados, nuevos confirmados tras repatriación y seguimiento internacional.</p><span class="emoji">🌍</span></article>
+    </section>
+
+    <section class="content-zone">
+      <div class="card case-table">
+        <div class="bar-title">RESUMEN DE CASOS Y EVENTOS CLAVE</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Caso / evento</th><th>Nacionalidad / grupo</th><th>Fecha clave</th><th>Exposición / vínculo</th><th>Clasificación</th><th>Desenlace / acción</th><th>Ubicación / destino</th><th>Confirmación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="center"><span class="case-chip chip-suspected">1</span></td><td>Neerlandés</td><td>06/04/2026</td><td>No reportada</td><td>Sospechoso</td><td>Fallecido 11/04</td><td>A bordo del crucero</td><td>No</td></tr>
+            <tr><td class="center"><span class="case-chip chip-confirmed">2</span></td><td>Neerlandesa</td><td>24/04/2026</td><td>Esposa / contacto cercano del Caso 1</td><td>Confirmado ANDV</td><td>Fallecida 26/04</td><td>Johannesburgo, Sudáfrica</td><td>Sí, PCR</td></tr>
+            <tr><td class="center"><span class="case-chip chip-confirmed">3</span></td><td>Británico</td><td>24/04/2026</td><td>Posible exposición a bordo</td><td>Confirmado ANDV</td><td>Hospitalizado</td><td>UCI Johannesburgo</td><td>Sí, PCR</td></tr>
+            <tr><td class="center"><span class="case-chip chip-confirmed">4</span></td><td>Alemana</td><td>28/04/2026</td><td>Pasajera del barco</td><td>Confirmado</td><td>Fallecida 02/05</td><td>A bordo del crucero</td><td>Sí / actualizado</td></tr>
+            <tr><td class="center"><span class="case-chip chip-confirmed">5</span></td><td>Médico del barco</td><td>Desconocida</td><td>Tripulación; atendió casos</td><td>Confirmado</td><td>Evacuación médica especializada</td><td>Países Bajos</td><td>Sí</td></tr>
+            <tr><td class="center"><span class="case-chip chip-confirmed">6</span></td><td>Tripulante neerlandés</td><td>28/04/2026</td><td>Tripulación</td><td>Confirmado</td><td>Evacuado / seguimiento</td><td>Países Bajos</td><td>Sí</td></tr>
+            <tr><td class="center"><span class="case-chip chip-confirmed">7</span></td><td>Suizo</td><td>Desconocida</td><td>Desembarcó del barco</td><td>Confirmado</td><td>Hospitalizado / seguimiento</td><td>Zúrich, Suiza</td><td>Sí</td></tr>
+            <tr><td class="center"><span class="case-chip chip-unknown">8</span></td><td>Británico</td><td>Desconocida</td><td>A bordo; desembarcó del barco</td><td>Probable / confirmado en tablero</td><td>En seguimiento</td><td>Tristán da Cunha</td><td>Actualizado</td></tr>
+            <tr><td class="center"><span class="case-chip chip-confirmed">9</span></td><td>Francés</td><td>10/05/2026</td><td>Síntomas durante vuelo de repatriación</td><td>Confirmado</td><td>En seguimiento</td><td>Francia</td><td>Sí</td></tr>
+            <tr><td class="center"><span class="case-chip chip-confirmed">10</span></td><td>Estados Unidos</td><td>Asintomático</td><td>Desembarcó con pasajeros estadounidenses el 10/05</td><td>Confirmado</td><td>Sin síntomas / seguimiento</td><td>Estados Unidos</td><td>Sí</td></tr>
+            <tr><td class="center"><span class="case-chip chip-confirmed">11</span></td><td>España</td><td>Asintomático</td><td>A bordo del MV Hondius; desembarcó el 10/05</td><td>Confirmado</td><td>Sin síntomas / seguimiento</td><td>España</td><td>Sí</td></tr>
+            <tr><td class="center">🌍</td><td>Pasajeros por nacionalidad</td><td>10–11/05/2026</td><td>Desembarque bajo operativo sanitario</td><td>Seguimiento</td><td>94 pasajeros evacuados; vuelos continúan el 11/05</td><td>España, Reino Unido, Francia, Países Bajos, Alemania, Bélgica, Grecia, EE. UU., Canadá, Australia, Irlanda y otros</td><td>Vigilancia activa</td></tr>
+            <tr><td class="center">🚢</td><td>Estado del buque</td><td>11/05/2026</td><td>Tripulación y pasajeros remanentes</td><td>Seguimiento</td><td>53 personas a bordo, incluidas 30 de tripulación que permanecen</td><td>MV Hondius / operativo sanitario</td><td>Sin pasajeros sintomáticos reportados a bordo</td></tr>
+            <tr><td class="center">🔎</td><td>Monitoreo</td><td>Abril–mayo</td><td>Personas desembarcadas el 24/04 y contactos de vuelos</td><td>Monitoreo</td><td>Seguimiento en EE. UU., Canadá, Turquía, Reino Unido y Santa Elena</td><td>Virginia, Nueva Jersey, Georgia, California, Texas, Canadá, Turquía, Santa Elena</td><td>En seguimiento</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <aside class="side-bottom">
+        <div class="card countries-box">
+          <h3>Vigilancia activa y monitoreo internacional</h3>
+          <p>España, Reino Unido, Francia, Países Bajos, Alemania, Bélgica, Grecia, Irlanda, Suiza, Italia, Turquía, Dinamarca, Suecia, Canadá, Estados Unidos, Australia y otros países mantienen seguimiento de contactos. También se monitorean personas desembarcadas el 24 de abril y contactos en EE. UU., Canadá, Turquía y Santa Elena.</p>
         </div>
-      </div>
-    </section>
-
-    <section class="legend">
-      <span><i class="dot d-confirmed"></i>Caso confirmado / laboratorio</span>
-      <span><i class="dot d-suspected"></i>Caso sospechoso / síntomas</span>
-      <span><i class="dot d-context"></i>Puerto o movimiento</span>
-      <span><i class="dot d-response"></i>Respuesta sanitaria</span>
-      <span><i class="dot d-air"></i>Evacuación o traslado</span>
-    </section>
-
-    <section class="panel">
-      <div class="timeline-title">
-        <div>
-          <h2>Ruta epidemiológica — M/V Hondius</h2>
-          <small>1 de abril al 5 de mayo de 2026 · Hantavirus Andes (ANDV)</small>
+        <div class="card route-box">
+          <h3>Rutas y traslados</h3>
+          <div class="route-line"><span class="line"></span>Ruta marítima del crucero M/V Hondius</div>
+          <div class="route-line"><span class="line evac"></span>Evacuaciones médicas / traslados de casos</div>
+          <div class="route-line"><span class="line repat"></span>Rutas aéreas / repatriación de pasajeros</div>
+          <div class="route-line"><span class="line passenger"></span>Viaje comercial de pasajero</div>
         </div>
-        <div class="credit">Mapa / línea elaborada por @solsilvanazb_episig</div>
-      </div>
-
-      <div class="timeline">
-        <div class="axis"></div>
-        <div class="month apr">ABRIL</div>
-        <div class="month may">MAYO</div>
-
-        <span class="tick" style="left:3%"></span>
-        <span class="tick" style="left:10%"></span>
-        <span class="tick" style="left:17%"></span>
-        <span class="tick" style="left:24%"></span>
-        <span class="tick" style="left:34%"></span>
-        <span class="tick" style="left:43%"></span>
-        <span class="tick" style="left:50%"></span>
-        <span class="tick" style="left:58%"></span>
-        <span class="tick" style="left:65%"></span>
-        <span class="tick" style="left:72%"></span>
-        <span class="tick" style="left:80%"></span>
-        <span class="tick" style="left:87%"></span>
-        <span class="tick" style="left:93%"></span>
-        <span class="tick" style="left:98%"></span>
-
-        <span class="marker ctx" style="left:3%"></span>
-        <span class="marker sus" style="left:10%"></span>
-        <span class="marker sus" style="left:17%"></span>
-        <span class="marker sus" style="left:24%"></span>
-        <span class="marker" style="left:34%"></span>
-        <span class="marker res" style="left:43%"></span>
-        <span class="marker" style="left:50%"></span>
-        <span class="marker res" style="left:58%"></span>
-        <span class="marker sus" style="left:65%"></span>
-        <span class="marker sus" style="left:72%"></span>
-        <span class="marker res" style="left:80%"></span>
-        <span class="marker sus" style="left:87%"></span>
-        <span class="marker res" style="left:93%"></span>
-        <span class="marker" style="left:98%"></span>
-
-        <article class="event context bottom" style="left:0%"><span class="date">1 Abr</span><h3>Ushuaia, Argentina</h3><p>El M/V Hondius zarpa e inicia su recorrido por el Atlántico Sur.</p></article>
-        <article class="event suspected top" style="left:7%"><span class="date">6 Abr</span><h3>A bordo</h3><p>Caso 1 inicia síntomas: fiebre, cefalea y diarrea leve.</p></article>
-        <article class="event suspected bottom" style="left:14%"><span class="date">8 Abr</span><h3>A bordo</h3><p>Caso 1 empeora: mareo, taquicardia y taquipnea.</p></article>
-        <article class="event suspected top" style="left:21%"><span class="date">11 Abr</span><h3>A bordo</h3><p>Caso 1 fallece a bordo del crucero.</p></article>
-        <article class="event confirmed bottom" style="left:31%"><span class="date">24 Abr</span><h3>Santa Elena</h3><p>Caso 2 desembarca con síntomas gastrointestinales. Caso 3 consulta por fiebre y dificultad respiratoria.</p></article>
-        <article class="event response top" style="left:40%"><span class="date">25 Abr</span><h3>Santa Elena → Johannesburgo</h3><p>Caso 2 viaja en vuelo comercial con 82 pasajeros hacia Sudáfrica.</p></article>
-        <article class="event confirmed bottom" style="left:47%"><span class="date">26 Abr</span><h3>Johannesburgo</h3><p>Caso 2 fallece en urgencias por neumonía y SDRA. Caso 3 empeora.</p></article>
-        <article class="event response top" style="left:55%"><span class="date">27 Abr</span><h3>Isla Ascensión → Sudáfrica</h3><p>Caso 3 es evacuado e ingresa a UCI. Caso 6, guía británico, inicia síntomas leves.</p></article>
-        <article class="event suspected bottom" style="left:62%"><span class="date">28 Abr</span><h3>A bordo</h3><p>Caso 4, mujer alemana, inicia fiebre y malestar general.</p></article>
-        <article class="event suspected top" style="left:69%"><span class="date">30 Abr</span><h3>A bordo</h3><p>Caso 5, médico del barco, inicia fiebre, fatiga y dolor muscular.</p></article>
-        <article class="event response bottom" style="left:77%"><span class="date">2 May</span><h3>Praia, Cabo Verde</h3><p>Reino Unido notifica a la OMS. Laboratorio confirma hantavirus en paciente de Johannesburgo. Caso 4 fallece a bordo. El barco arriba a Praia.</p></article>
-        <article class="event suspected top" style="left:84%"><span class="date">3 May</span><h3>Praia, Cabo Verde</h3><p>Se toman muestras del caso 4. Caso 7, hombre alemán que compartía cabina con caso 4, presenta fiebre leve.</p></article>
-        <article class="event response bottom" style="left:90%"><span class="date">4 May</span><h3>Santa Elena → Suiza</h3><p>La OMS es informada de un caso hospitalizado en Suiza que desembarcó en Santa Elena y viajó a Suiza. Se implementan medidas a bordo.</p></article>
-        <article class="event confirmed top" style="left:95%"><span class="date">5 May</span><h3>Suiza / Zúrich</h3><p>Suiza confirma por PCR infección por hantavirus Andes. Total: 8 casos, 3 fallecidos, 3 confirmados y 2 secuenciados como Andes. Evacuación médica de casos 5, 6 y 7.</p></article>
-
-        <aside class="sidebox">
-          <h3>Resumen epidemiológico</h3>
-          <p><strong>8</strong> casos totales reportados · <strong>3</strong> fallecidos · <strong>3</strong> confirmados por laboratorio · <strong>2</strong> secuenciados como virus Andes.</p>
-        </aside>
-      </div>
+        <div class="card ref-box">
+          <h3>Referencias</h3>
+          <div class="ref-grid">
+            <div>⚓ Puertos / escalas</div><div>🧪 Laboratorio</div>
+            <div>🛳 Navegación</div><div>📣 Acción pública</div>
+            <div>✈ Evacuación aérea</div><div>✝ Fallecido</div>
+          </div>
+        </div>
+      </aside>
     </section>
 
-    <section class="stats">
-      <div class="stat"><div class="num">8</div><div class="lab">casos totales reportados</div></div>
-      <div class="stat"><div class="num">3</div><div class="lab">fallecidos</div></div>
-      <div class="stat"><div class="num">3</div><div class="lab">confirmados por laboratorio</div></div>
-      <div class="stat"><div class="num">2</div><div class="lab">secuenciados como virus Andes</div></div>
-    </section>
-
-    <section class="routes">
-      <div class="route-card">
-        <h3>Rutas aéreas y evacuaciones</h3>
-        <ul>
-          <li><strong>25 Abr:</strong> Santa Elena → Johannesburgo. Caso 2 fallecido el 26/04. 82 pasajeros en el vuelo.</li>
-          <li><strong>27 Abr:</strong> Isla Ascensión → Johannesburgo. Caso 3 hospitalizado en UCI.</li>
-          <li><strong>4 May:</strong> Santa Elena → Zúrich, Suiza. Caso 8 confirmado el 5/05.</li>
-        </ul>
-      </div>
-      <div class="route-card risk">
-        <h3>Situación de riesgo</h3>
-        <ul>
-          <li>Riesgo en el crucero: <strong>MODERADO</strong></li>
-          <li>Riesgo global: <strong>BAJO</strong></li>
-          <li>La transmisión principal sigue siendo zoonótica; la transmisión persona-persona es rara y asociada a contactos estrechos.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="note">
-      <div><strong>Mensaje epidemiológico:</strong> evento serio que requiere vigilancia, diagnóstico oportuno, seguimiento de contactos y medidas de control; no debe comunicarse como un virus respiratorio de alta propagación.</div>
-      <div>Información + vigilancia + prevención</div>
-    </section>
-
-    <footer class="footer">
-      <div>Información sujeta a cambios conforme se actualicen los reportes oficiales.</div>
-      <div class="brand">@solsilvanazb_episig ☀️⭐🖤💙⭐☀️</div>
-    </footer>
+    <div class="foot">
+      <span>Información basada en reportes oficiales, comunicados de operadores y tablero de seguimiento ANDV Hantavirus 2026 disponible al 11 de mayo de 2026. Datos sujetos a actualización.</span>
+      <strong>@solsilvanazb_episig</strong>
+    </div>
   </main>
 </body>
 </html>
